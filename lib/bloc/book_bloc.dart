@@ -4,7 +4,7 @@ import './bloc.dart';
 
 class BookBloc extends Bloc<BookEvent, BookState> {
   @override
-  BookState get initialState => InitialBookState();
+  BookState get initialState => BookInitial();
 
   @override
   Stream<BookState> mapEventToState(
