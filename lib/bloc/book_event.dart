@@ -7,7 +7,7 @@ abstract class BookEvent extends Equatable {
 }
 
 class GetBook extends BookEvent {
-  String isbn;
+  final String isbn;
 
   GetBook(this.isbn) : super([isbn]);
 }

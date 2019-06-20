@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'bloc/bloc.dart';
 
 class IsbnForm extends StatefulWidget {
   const IsbnForm({
@@ -64,6 +67,8 @@ class _IsbnFormState extends State<IsbnForm> {
   void isbnFormSubmit() {
     if (_formKey.currentState.validate()) {
       print("Isbn: ${_isbnController.text}");
+      final bookBloc = BlocProvider.of<BookBloc>(context);
+      bookBloc.dispatch(GetBook(_isbnController.text));
     } else {
       print("Invalid Isbn");
     }

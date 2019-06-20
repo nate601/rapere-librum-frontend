@@ -10,10 +10,7 @@ abstract class BookState extends Equatable {
 
 class BookInitial extends BookState {}
 
-class BookLoadingDetails extends BookState {
-  final String isbn;
-  BookLoadingDetails(this.isbn) : super([isbn]);
-}
+class BookLoadingDetails extends BookState {}
 
 class BookLoadedDetails extends BookState {
   final BookDetails foundBook;
