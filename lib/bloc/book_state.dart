@@ -12,7 +12,6 @@ class BookInitial extends BookState {}
 
 class BookLoadingDetails extends BookState {
   final String isbn;
-
   BookLoadingDetails(this.isbn) : super([isbn]);
 }
 
