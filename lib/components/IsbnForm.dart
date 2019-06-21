@@ -81,5 +81,7 @@ class _IsbnFormState extends State<IsbnForm> {
     }
   }
 
-  void _searchByCamera() {}
+  void _searchByCamera() {
+    BlocProvider.of<BookBloc>(context).dispatch(StartCameraRead());
+  }
 }
