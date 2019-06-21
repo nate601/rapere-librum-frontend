@@ -37,6 +37,7 @@ class _LoadedPageState extends State<LoadedPage> {
         new GoogleInfoCard(
           details: details,
         ),
+        new LibgenInfoCards(details: details)
       ],
     );
   }
@@ -45,6 +46,25 @@ class _LoadedPageState extends State<LoadedPage> {
     final bloc = BlocProvider.of<BookBloc>(context);
 
     bloc.dispatch(ClearSelection());
+  }
+}
+
+class LibgenInfoCards extends StatelessWidget {
+  final BookDetails details;
+
+  const LibgenInfoCards({Key key, this.details}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: List.generate(details.possibleLinks.length, buildLibgenSubCard),
+    );
+  }
+
+  Widget buildLibgenSubCard(i) {
+    return new RaisedButton(
+      child: new Text("${details.possibleLinks[i]}"),
+    );
   }
 }
 
