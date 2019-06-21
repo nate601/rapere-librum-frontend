@@ -9,6 +9,9 @@ class LibgenInfoCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (details == null || details.possibleLinks == null) {
+      return Text("Out");
+    }
     return Column(
       children: List.generate(
           details.possibleLinks.rows[0].mirrorLinks.length, buildLibgenSubCard),

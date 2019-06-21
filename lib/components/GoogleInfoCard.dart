@@ -13,11 +13,14 @@ class GoogleInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (details == null) {
+      return Text("Out");
+    }
     return Card(
       child: Row(
         children: <Widget>[
           SizedBox(
-            child: new Image.network(details.thumbnailUrl),
+            child: imageNullChecker(),
             width: 128,
             height: 206,
           ),
@@ -49,5 +52,13 @@ class GoogleInfoCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  imageNullChecker() {
+    if (details == null) {
+      return Placeholder();
+    } else {
+      return Image.network(details.thumbnailUrl);
+    }
   }
 }
