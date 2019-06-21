@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rapere_librum/bloc/Model/BookDetails.dart';
 import 'package:rapere_librum/bloc/bloc.dart';
+import 'package:rapere_librum/components/Stars.dart';
 
 class LoadedPage extends StatefulWidget {
   const LoadedPage({
@@ -30,45 +31,46 @@ class _LoadedPageState extends State<LoadedPage> {
     );
   }
 
-  Card buildCard(BookDetails details) {
-    return Card(
-      child: Row(
-        children: <Widget>[
-          SizedBox(
-            child: new Image.network(details.thumbnailUrl),
-            width: 128,
-            height: 206,
-          ),
-          Padding(
-            padding: EdgeInsets.all(8),
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            verticalDirection: VerticalDirection.down,
-            crossAxisAlignment: CrossAxisAlignment.start,
+  Widget buildCard(BookDetails details) {
+    return Column(
+      children: <Widget>[
+        Card(
+          child: Row(
             children: <Widget>[
-              new Text(
-                "${details.bookName}",
-                style: TextStyle(fontSize: 20),
+              SizedBox(
+                child: new Image.network(details.thumbnailUrl),
+                width: 128,
+                height: 206,
               ),
-              Text(
-                "${details.authorName}",
-                style: TextStyle(
-                  fontSize: 15,
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-              Text(
-                  "Rating: ${details.currentRating}/5 (${details.numberOfReviews})"),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 60),
+                padding: EdgeInsets.all(8),
               ),
-              Text("Link1"),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                verticalDirection: VerticalDirection.down,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Text(
+                    "${details.bookName}",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    "${details.authorName}",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                  Stars(
+                    star: details.currentRating,
+                  )
+                ],
+              )
             ],
-          )
-        ],
-      ),
+          ),
+        ),
+      ],
     );
   }
 
