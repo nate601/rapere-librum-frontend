@@ -35,7 +35,7 @@ class _LoadedPageState extends State<LoadedPage> {
       child: Row(
         children: <Widget>[
           SizedBox(
-            child: Placeholder(),
+            child: new Image.network(details.thumbnailUrl),
             width: 128,
             height: 206,
           ),
@@ -60,10 +60,11 @@ class _LoadedPageState extends State<LoadedPage> {
                 ),
               ),
               Text(
-                  "Rating: ${details.currentRating} (${details.numberOfReviews})"),
+                  "Rating: ${details.currentRating}/5 (${details.numberOfReviews})"),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 60),
               ),
+              Text("Link1"),
             ],
           )
         ],
