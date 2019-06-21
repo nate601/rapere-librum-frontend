@@ -18,15 +18,8 @@ class BookBloc extends Bloc<BookEvent, BookState> {
   ) async* {
     if (event is GetBook) {
       yield BookLoadingDetails();
-      await Future.delayed(Duration(seconds: 2));
       BookDetails getBookDetails = await getBookDetailsFromServer(event.isbn);
       yield BookLoadedDetails(getBookDetails);
-      // yield BookLoadedDetails(new BookDetails(
-      //   authorName: "test",
-      //   bookName: "test",
-      //   possibleLinks: <String>["test", "test"],
-      //   thumbnailUrl: "test",
-      // ));
     } else if (event is ClearSelection) {
       yield BookInitial();
     } else if (event is StartCameraRead) {
