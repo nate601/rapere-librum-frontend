@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rapere_librum/bloc/Model/BookDetails.dart';
 import 'package:rapere_librum/bloc/bloc.dart';
 import 'package:rapere_librum/components/GoogleInfoCard.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoadedPage extends StatefulWidget {
   const LoadedPage({
@@ -71,11 +72,19 @@ class LibgenInfoCards extends StatelessWidget {
     return Align(
       alignment: Alignment.topCenter,
       child: RaisedButton(
-        child: Text(
-            "${getMirrorLinkPrettyName(details.possibleLinks.rows[0].mirrorLinks[i])}"),
-        onPressed: () {},
-      ),
+          child: Text(
+              "${getMirrorLinkPrettyName(details.possibleLinks.rows[0].mirrorLinks[i])}"),
+          onPressed: () {
+            _launchUrl(details.possibleLinks.rows[0].mirrorLinks[i]);
+          }),
     );
+  }
+
+  _launchUrl(String url) async {
+    print("launch $url");
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
   }
 
   String getMirrorLinkPrettyName(String originalName) {
