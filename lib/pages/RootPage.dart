@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rapere_librum/bloc/bloc.dart';
 
-import '../IsbnForm.dart';
+import 'InitialPage.dart';
+import 'LoadedPage.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({
@@ -38,14 +39,7 @@ class _RootPageState extends State<RootPage> {
   }
 
   Widget buildInitial() {
-    return new Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Rapere Librum",
-        ),
-      ),
-      body: IsbnForm(),
-    );
+    return new InitialPage();
   }
 
   Widget buildLoading() {
@@ -55,39 +49,6 @@ class _RootPageState extends State<RootPage> {
   }
 
   Widget buildLoaded() {
-    return new Scaffold(
-      appBar: AppBar(
-        title: new Text("Rapere Librum"),
-        centerTitle: true,
-        leading: new IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: goBack,
-        ),
-      ),
-      body: Card(
-        child: Row(
-          children: <Widget>[
-            SizedBox(
-              child: Placeholder(),
-              width: 128,
-              height: 206,
-            ),
-            Padding(
-              padding: EdgeInsets.all(8),
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                new Text("Book name"),
-                Text("Author name"),
-              ],
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            )
-          ],
-        ),
-      ),
-    );
+    return new LoadedPage();
   }
-
-  void goBack() {}
 }
