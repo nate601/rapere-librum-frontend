@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rapere_librum/bloc/Model/BookDetails.dart';
 import './bloc.dart';
 import 'package:http/http.dart' as http;
@@ -27,6 +28,11 @@ class BookBloc extends Bloc<BookEvent, BookState> {
       //   thumbnailUrl: "test",
       // ));
     } else if (event is ClearSelection) {
+      yield BookInitial();
+    } else if (event is StartCameraRead) {
+      yield BookLoadingDetails();
+      var image = await ImagePicker.pickImage(source: ImageSource.camera);
+      await Future.delayed(Duration(seconds: 2));
       yield BookInitial();
     }
   }
