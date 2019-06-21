@@ -43,14 +43,22 @@ class _IsbnFormState extends State<IsbnForm> {
                     controller: _isbnController,
                   ),
                 ),
-                RaisedButton(
-                  child: Text(
-                    "Search",
-                  ),
-                  onPressed: isbnFormSubmit,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 100,
-                  ),
+                Row(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.camera),
+                      onPressed: _searchByCamera,
+                    ),
+                    RaisedButton(
+                      child: Text(
+                        "Search",
+                      ),
+                      onPressed: isbnFormSubmit,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 100,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -72,4 +80,6 @@ class _IsbnFormState extends State<IsbnForm> {
       print("Invalid Isbn");
     }
   }
+
+  void _searchByCamera() {}
 }
