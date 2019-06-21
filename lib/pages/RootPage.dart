@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rapere_librum/bloc/Model/BookDetails.dart';
 import 'package:rapere_librum/bloc/bloc.dart';
-import 'package:rapere_librum/components/IsbnForm.dart';
 
 import 'InitialPage.dart';
+import 'InvalidPage.dart';
 import 'LoadedPage.dart';
 
 class RootPage extends StatefulWidget {
