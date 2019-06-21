@@ -8,9 +8,12 @@ class Stars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Row(
-      children: new List.generate(5, buildStar),
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      alignment: const Alignment(0, 0),
+      child: new Row(
+        children: new List.generate(5, buildStar),
+        crossAxisAlignment: CrossAxisAlignment.start,
+      ),
     );
   }
 
