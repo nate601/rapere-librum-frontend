@@ -11,3 +11,7 @@ class GetBook extends BookEvent {
 
   GetBook(this.isbn) : super([isbn]);
 }
+
+class ClearSelection extends BookEvent {
+  ClearSelection() : super([]);
+}
