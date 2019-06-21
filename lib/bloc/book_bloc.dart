@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rapere_librum/bloc/Model/BookDetails.dart';
 import './bloc.dart';
@@ -25,6 +26,11 @@ class BookBloc extends Bloc<BookEvent, BookState> {
     } else if (event is StartCameraRead) {
       yield BookLoadingDetails();
       var image = await ImagePicker.pickImage(source: ImageSource.camera);
+      FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(image);
+      BarcodeDetector barcodeDetector =
+          FirebaseVision.instance.barcodeDetector();
+      List<Barcode> barcodes = await barcodeDetector.detectInImage(visionImage);
+      print(barcodes.length);
       await Future.delayed(Duration(seconds: 2));
       yield BookInitial();
     }
