@@ -1,11 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
+import 'BookLinks.dart';
+
 class BookDetails extends Equatable {
   final String bookName;
   final String authorName;
   final String thumbnailUrl;
-  final List<String> possibleLinks;
+  final BookLinks possibleLinks;
   final String currentRating;
   final String numberOfReviews;
 
@@ -27,7 +29,7 @@ class BookDetails extends Equatable {
       authorName: json["authorName"],
       bookName: json["bookTitle"],
       thumbnailUrl: json["urlToThumbnail"],
-      possibleLinks: [],
+      possibleLinks: null,
       currentRating: json["averageRating"],
       numberOfReviews: json["numberOfRatings"],
     );

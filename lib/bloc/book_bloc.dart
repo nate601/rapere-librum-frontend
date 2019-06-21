@@ -46,7 +46,7 @@ class BookBloc extends Bloc<BookEvent, BookState> {
       numberOfReviews: retVal.numberOfReviews,
       currentRating: retVal.currentRating,
       thumbnailUrl: retVal.thumbnailUrl,
-      possibleLinks: libgenLinks.rows[0].mirrorLinks,
+      possibleLinks: libgenLinks,
     );
     return retVal;
   }

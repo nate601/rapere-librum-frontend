@@ -55,17 +55,9 @@ class LibgenInfoCards extends StatelessWidget {
   const LibgenInfoCards({Key key, this.details}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: List.generate(details.possibleLinks.length, buildLibgenSubCard),
-    );
-  }
+  Widget build(BuildContext context) {}
 
-  Widget buildLibgenSubCard(i) {
-    return new RaisedButton(
-      child: new Text("${details.possibleLinks[i]}"),
-    );
-  }
+  Widget buildLibgenSubCard(i) {}
 }
 
 class GoogleInfoCard extends StatelessWidget {
