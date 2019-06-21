@@ -18,34 +18,34 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Rapere Librum",
-        ),
-      ),
-      body: BlocProvider(
-        builder: (BuildContext context) => bookBloc,
-        child: Container(
-          child: BlocBuilder(
-            bloc: bookBloc,
-            builder: (BuildContext context, BookState state) {
-              if (state is BookInitial) {
-                return buildInitial();
-              } else if (state is BookLoadingDetails) {
-                return buildLoading();
-              } else if (state is BookLoadedDetails) {
-                return buildLoaded();
-              }
-            },
-          ),
+    return BlocProvider(
+      builder: (BuildContext context) => bookBloc,
+      child: Container(
+        child: BlocBuilder(
+          bloc: bookBloc,
+          builder: (BuildContext context, BookState state) {
+            if (state is BookInitial) {
+              return buildInitial();
+            } else if (state is BookLoadingDetails) {
+              return buildLoading();
+            } else if (state is BookLoadedDetails) {
+              return buildLoaded();
+            }
+          },
         ),
       ),
     );
   }
 
   Widget buildInitial() {
-    return IsbnForm();
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Rapere Librum",
+        ),
+      ),
+      body: IsbnForm(),
+    );
   }
 
   Widget buildLoading() {
@@ -55,10 +55,39 @@ class _RootPageState extends State<RootPage> {
   }
 
   Widget buildLoaded() {
-    return Card(
-      child: Column(
-        children: <Widget>[],
+    return new Scaffold(
+      appBar: AppBar(
+        title: new Text("Rapere Librum"),
+        centerTitle: true,
+        leading: new IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: goBack,
+        ),
+      ),
+      body: Card(
+        child: Row(
+          children: <Widget>[
+            SizedBox(
+              child: Placeholder(),
+              width: 128,
+              height: 206,
+            ),
+            Padding(
+              padding: EdgeInsets.all(8),
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                new Text("Book name"),
+                Text("Author name"),
+              ],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            )
+          ],
+        ),
       ),
     );
   }
+
+  void goBack() {}
 }
