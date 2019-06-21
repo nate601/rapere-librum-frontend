@@ -30,8 +30,11 @@ class BookBloc extends Bloc<BookEvent, BookState> {
   }
 
   Future<BookDetails> getBookDetailsFromServer(String isbn) async {
-    var url = "http://localhost:5000";
-    var resp = await http.get("$url/api/BookInfoFetch/$isbn");
-    Map<String, dynamic> testing = json.decode(resp.body);
+    var url = "http://192.168.0.2:5000";
+    var googleBooksReponse = await http.get("$url/api/BookInfoFetch/$isbn");
+    return BookDetails.fromJson(json.decode(googleBooksReponse.body));
+    // var libgenSearchResponse =
+    //     await http.get("$url/api/BookLinksFetch/${googleDecode["bookTitle"]}");
+    // Map<String, dynamic> libgenLinks = json.decode(libgenSearchResponse.body);
   }
 }

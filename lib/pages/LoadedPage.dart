@@ -59,6 +59,8 @@ class _LoadedPageState extends State<LoadedPage> {
                   fontStyle: FontStyle.italic,
                 ),
               ),
+              Text(
+                  "Rating: ${details.currentRating} (${details.numberOfReviews})"),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 60),
               ),
