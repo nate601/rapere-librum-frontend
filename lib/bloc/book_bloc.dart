@@ -22,6 +22,8 @@ class BookBloc extends Bloc<BookEvent, BookState> {
           thumbnailUrl: "test",
         ),
       );
+    } else if (event is ClearSelection) {
+      yield BookInitial();
     }
   }
 }
