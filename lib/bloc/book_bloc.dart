@@ -5,6 +5,8 @@ import 'package:rapere_librum/bloc/Model/BookDetails.dart';
 import './bloc.dart';
 import 'package:http/http.dart' as http;
 
+import 'Model/BookLinks.dart';
+
 class BookBloc extends Bloc<BookEvent, BookState> {
   @override
   BookState get initialState => BookInitial();
@@ -32,9 +34,20 @@ class BookBloc extends Bloc<BookEvent, BookState> {
   Future<BookDetails> getBookDetailsFromServer(String isbn) async {
     var url = "http://192.168.0.2:5000";
     var googleBooksReponse = await http.get("$url/api/BookInfoFetch/$isbn");
-    return BookDetails.fromJson(json.decode(googleBooksReponse.body));
-    // var libgenSearchResponse =
-    //     await http.get("$url/api/BookLinksFetch/${googleDecode["bookTitle"]}");
-    // Map<String, dynamic> libgenLinks = json.decode(libgenSearchResponse.body);
+    var retVal = BookDetails.fromJson(json.decode(googleBooksReponse.body));
+
+    var libgenSearchResponse =
+        await http.get("$url/api/BookLinksFetch/${retVal.bookName}");
+    BookLinks libgenLinks =
+        BookLinks.fromJson(json.decode(libgenSearchResponse.body));
+    retVal = BookDetails(
+      authorName: retVal.authorName,
+      bookName: retVal.bookName,
+      numberOfReviews: retVal.numberOfReviews,
+      currentRating: retVal.currentRating,
+      thumbnailUrl: retVal.thumbnailUrl,
+      possibleLinks: libgenLinks.rows[0].mirrorLinks,
+    );
+    return retVal;
   }
 }
