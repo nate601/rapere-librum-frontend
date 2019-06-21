@@ -17,3 +17,5 @@ class BookLoadedDetails extends BookState {
 
   BookLoadedDetails(this.foundBook) : super([foundBook]);
 }
+
+class BookInvalid extends BookState {}

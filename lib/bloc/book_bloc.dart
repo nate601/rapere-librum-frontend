@@ -20,39 +20,58 @@ class BookBloc extends Bloc<BookEvent, BookState> {
     if (event is GetBook) {
       yield BookLoadingDetails();
       BookDetails getBookDetails = await getBookDetailsFromServer(event.isbn);
-      yield BookLoadedDetails(getBookDetails);
+      if (getBookDetails != null) {
+        yield BookLoadedDetails(getBookDetails);
+      } else {
+        yield BookInitial();
+      }
     } else if (event is ClearSelection) {
       yield BookInitial();
     } else if (event is StartCameraRead) {
       yield BookLoadingDetails();
-      var image = await ImagePicker.pickImage(source: ImageSource.camera);
+      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
       FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(image);
       BarcodeDetector barcodeDetector =
           FirebaseVision.instance.barcodeDetector();
+
       List<Barcode> barcodes = await barcodeDetector.detectInImage(visionImage);
-      print(barcodes.length);
-      await Future.delayed(Duration(seconds: 2));
-      yield BookInitial();
+      print(barcodes[0].rawValue);
+      if (barcodes.length == 1) {
+        var foundBook = await getBookDetailsFromServer(barcodes[0].rawValue);
+        if (foundBook == null) {
+          yield BookInitial();
+        } else {
+          yield BookLoadedDetails(foundBook);
+        }
+      } else {
+        yield BookInitial();
+      }
     }
   }
 
   Future<BookDetails> getBookDetailsFromServer(String isbn) async {
     var url = "http://192.168.0.2:5000";
     var googleBooksReponse = await http.get("$url/api/BookInfoFetch/$isbn");
+    if (googleBooksReponse.statusCode != 200) {
+      return null;
+    }
     var retVal = BookDetails.fromJson(json.decode(googleBooksReponse.body));
 
     var libgenSearchResponse =
         await http.get("$url/api/BookLinksFetch/${retVal.bookName}");
-    BookLinks libgenLinks =
-        BookLinks.fromJson(json.decode(libgenSearchResponse.body));
-    var newRetVal = BookDetails(
-      authorName: retVal.authorName,
-      bookName: retVal.bookName,
-      numberOfReviews: retVal.numberOfReviews,
-      currentRating: retVal.currentRating,
-      thumbnailUrl: retVal.thumbnailUrl,
-      possibleLinks: libgenLinks,
-    );
-    return newRetVal;
+    if (libgenSearchResponse.statusCode == 200) {
+      BookLinks libgenLinks =
+          BookLinks.fromJson(json.decode(libgenSearchResponse.body));
+      var newRetVal = BookDetails(
+        authorName: retVal.authorName,
+        bookName: retVal.bookName,
+        numberOfReviews: retVal.numberOfReviews,
+        currentRating: retVal.currentRating,
+        thumbnailUrl: retVal.thumbnailUrl,
+        possibleLinks: libgenLinks,
+      );
+      return newRetVal;
+    }
+    return retVal;
   }
 }

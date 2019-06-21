@@ -32,6 +32,8 @@ class _RootPageState extends State<RootPage> {
               return buildLoading();
             } else if (state is BookLoadedDetails) {
               return buildLoaded(state.foundBook);
+            } else if (state is BookInvalid) {
+              return buildInvalid();
             }
           },
         ),
@@ -41,6 +43,10 @@ class _RootPageState extends State<RootPage> {
 
   Widget buildInitial() {
     return new InitialPage();
+  }
+
+  Widget buildInvalid() {
+    return new InitialPage(); // * implement invalid page
   }
 
   Widget buildLoading() {
