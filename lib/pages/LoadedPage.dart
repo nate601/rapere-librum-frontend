@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rapere_librum/bloc/Model/BookDetails.dart';
 import 'package:rapere_librum/bloc/bloc.dart';
 import 'package:rapere_librum/components/GoogleInfoCard.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:rapere_librum/components/LibgenInfoCards.dart';
 
 class LoadedPage extends StatefulWidget {
   const LoadedPage({
@@ -51,44 +51,5 @@ class _LoadedPageState extends State<LoadedPage> {
     final bloc = BlocProvider.of<BookBloc>(context);
 
     bloc.dispatch(ClearSelection());
-  }
-}
-
-class LibgenInfoCards extends StatelessWidget {
-  final BookDetails details;
-
-  const LibgenInfoCards({Key key, this.details}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: List.generate(
-          details.possibleLinks.rows[0].mirrorLinks.length, buildLibgenSubCard),
-      mainAxisAlignment: MainAxisAlignment.start,
-    );
-  }
-
-  Widget buildLibgenSubCard(int i) {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: RaisedButton(
-          child: Text(
-              "${getMirrorLinkPrettyName(details.possibleLinks.rows[0].mirrorLinks[i])}"),
-          onPressed: () {
-            _launchUrl(details.possibleLinks.rows[0].mirrorLinks[i]);
-          }),
-    );
-  }
-
-  _launchUrl(String url) async {
-    print("launch $url");
-    if (await canLaunch(url)) {
-      await launch(url);
-    }
-  }
-
-  String getMirrorLinkPrettyName(String originalName) {
-    RegExp prettierRegEx = new RegExp(r"\/\/(.*?)\.");
-    return prettierRegEx.firstMatch(originalName).group(1);
   }
 }

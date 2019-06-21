@@ -11,6 +11,9 @@ class GetBook extends BookEvent {
 
   GetBook(this.isbn) : super([isbn]);
 }
+class StartCameraRead extends BookEvent{
+  StartCameraRead():super([]);
+}
 
 class ClearSelection extends BookEvent {
   ClearSelection() : super([]);

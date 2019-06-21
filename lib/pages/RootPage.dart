@@ -4,6 +4,7 @@ import 'package:rapere_librum/bloc/Model/BookDetails.dart';
 import 'package:rapere_librum/bloc/bloc.dart';
 
 import 'InitialPage.dart';
+import 'InvalidPage.dart';
 import 'LoadedPage.dart';
 
 class RootPage extends StatefulWidget {
@@ -32,6 +33,8 @@ class _RootPageState extends State<RootPage> {
               return buildLoading();
             } else if (state is BookLoadedDetails) {
               return buildLoaded(state.foundBook);
+            } else if (state is BookInvalid) {
+              return buildInvalid();
             }
           },
         ),
@@ -41,6 +44,10 @@ class _RootPageState extends State<RootPage> {
 
   Widget buildInitial() {
     return new InitialPage();
+  }
+
+  Widget buildInvalid() {
+    return new InvalidPage(); // * implement invalid page
   }
 
   Widget buildLoading() {

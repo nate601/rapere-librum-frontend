@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "388413089681",
+    "firebase_url": "https://raperelibrum.firebaseio.com",
+    "project_id": "raperelibrum",
+    "storage_bucket": "raperelibrum.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388413089681:android:2c084addc53d4ec9",
+        "android_client_info": {
+          "package_name": "com.example.rapere_librum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388413089681-sld8dgml52m8ml0b1f9fimo5fkog2efn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmv5a_wlO7U_i_0MMuai2mZ8U45hO6p-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388413089681-sld8dgml52m8ml0b1f9fimo5fkog2efn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "388413089681-4p27mq09om25blgej007o994k7mg53ap.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "RLIphone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
