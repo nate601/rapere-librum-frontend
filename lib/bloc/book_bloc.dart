@@ -40,7 +40,7 @@ class BookBloc extends Bloc<BookEvent, BookState> {
         await http.get("$url/api/BookLinksFetch/${retVal.bookName}");
     BookLinks libgenLinks =
         BookLinks.fromJson(json.decode(libgenSearchResponse.body));
-    retVal = BookDetails(
+    var newRetVal = BookDetails(
       authorName: retVal.authorName,
       bookName: retVal.bookName,
       numberOfReviews: retVal.numberOfReviews,
@@ -48,6 +48,6 @@ class BookBloc extends Bloc<BookEvent, BookState> {
       thumbnailUrl: retVal.thumbnailUrl,
       possibleLinks: libgenLinks,
     );
-    return retVal;
+    return newRetVal;
   }
 }

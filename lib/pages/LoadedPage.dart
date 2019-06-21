@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rapere_librum/bloc/Model/BookDetails.dart';
 import 'package:rapere_librum/bloc/bloc.dart';
-import 'package:rapere_librum/components/Stars.dart';
+import 'package:rapere_librum/components/GoogleInfoCard.dart';
 
 class LoadedPage extends StatefulWidget {
   const LoadedPage({
@@ -37,6 +37,10 @@ class _LoadedPageState extends State<LoadedPage> {
         new GoogleInfoCard(
           details: details,
         ),
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Divider(),
+        ),
         new LibgenInfoCards(details: details)
       ],
     );
@@ -55,56 +59,27 @@ class LibgenInfoCards extends StatelessWidget {
   const LibgenInfoCards({Key key, this.details}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {}
-
-  Widget buildLibgenSubCard(i) {}
-}
-
-class GoogleInfoCard extends StatelessWidget {
-  const GoogleInfoCard({
-    Key key,
-    @required this.details,
-  }) : super(key: key);
-
-  final BookDetails details;
-
-  @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Row(
-        children: <Widget>[
-          SizedBox(
-            child: new Image.network(details.thumbnailUrl),
-            width: 128,
-            height: 206,
-          ),
-          Padding(
-            padding: EdgeInsets.all(8),
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            verticalDirection: VerticalDirection.down,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              new Text(
-                "${details.bookName}",
-                style: TextStyle(fontSize: 20),
-              ),
-              Text(
-                "${details.authorName}",
-                style: TextStyle(
-                  fontSize: 15,
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-              Stars(
-                star: details.currentRating,
-              )
-            ],
-          )
-        ],
+    return Column(
+      children: List.generate(
+          details.possibleLinks.rows[0].mirrorLinks.length, buildLibgenSubCard),
+      mainAxisAlignment: MainAxisAlignment.start,
+    );
+  }
+
+  Widget buildLibgenSubCard(int i) {
+    return Align(
+      alignment: Alignment.topCenter,
+      child: RaisedButton(
+        child: Text(
+            "${getMirrorLinkPrettyName(details.possibleLinks.rows[0].mirrorLinks[i])}"),
+        onPressed: () {},
       ),
     );
+  }
+
+  String getMirrorLinkPrettyName(String originalName) {
+    RegExp prettierRegEx = new RegExp(r"\/\/(.*?)\.");
+    return prettierRegEx.firstMatch(originalName).group(1);
   }
 }
