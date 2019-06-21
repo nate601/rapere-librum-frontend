@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rapere_librum/bloc/Model/BookDetails.dart';
 import 'package:rapere_librum/bloc/bloc.dart';
 
 import 'InitialPage.dart';
@@ -30,7 +31,7 @@ class _RootPageState extends State<RootPage> {
             } else if (state is BookLoadingDetails) {
               return buildLoading();
             } else if (state is BookLoadedDetails) {
-              return buildLoaded();
+              return buildLoaded(state.foundBook);
             }
           },
         ),
@@ -43,12 +44,19 @@ class _RootPageState extends State<RootPage> {
   }
 
   Widget buildLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Rapere Librum"),
+      ),
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 
-  Widget buildLoaded() {
-    return new LoadedPage();
+  Widget buildLoaded(BookDetails details) {
+    return new LoadedPage(
+      details: details,
+    );
   }
 }
