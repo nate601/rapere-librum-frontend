@@ -30,7 +30,7 @@ class BookBloc extends Bloc<BookEvent, BookState> {
       yield BookInitial();
     } else if (event is StartCameraRead) {
       yield BookLoadingDetails();
-      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+      var image = await ImagePicker.pickImage(source: ImageSource.camera);
       FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(image);
       BarcodeDetector barcodeDetector =
           FirebaseVision.instance.barcodeDetector();
