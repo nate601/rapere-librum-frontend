@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>388413089681-ihejufebah3maj28sktn2uqd9eiv1bjm.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.388413089681-ihejufebah3maj28sktn2uqd9eiv1bjm</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAWCgXFb7KxoET6H0vdfQVWaIKMECcXDGY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>388413089681</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>me.nate601.rapereLibrum</string>
+	<key>PROJECT_ID</key>
+	<string>raperelibrum</string>
+	<key>STORAGE_BUCKET</key>
+	<string>raperelibrum.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:388413089681:ios:d6250bcba38a6e99</string>
+	<key>DATABASE_URL</key>
+	<string>https://raperelibrum.firebaseio.com</string>
+</dict>
+</plist>
