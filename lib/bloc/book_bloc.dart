@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rapere_librum/GlobalConstants.dart';
 import 'package:rapere_librum/bloc/Model/BookDetails.dart';
 import './bloc.dart';
 import 'package:http/http.dart' as http;
@@ -50,7 +51,7 @@ class BookBloc extends Bloc<BookEvent, BookState> {
   }
 
   Future<BookDetails> getBookDetailsFromServer(String isbn) async {
-    var url = "http://192.168.0.2:5000";
+    var url = GlobalConstants.url;
     var googleBooksReponse = await http.get("$url/api/BookInfoFetch/$isbn");
     if (googleBooksReponse.statusCode != 200) {
       return null;
