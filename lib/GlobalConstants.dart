@@ -1,3 +1,3 @@
 class GlobalConstants {
-  static const String url = "http://192.168.0.2:5000";
+  static const String url = "http://box.nate601.me:5000";
 }
