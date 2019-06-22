@@ -53,7 +53,9 @@ class _IsbnFormState extends State<IsbnForm> {
                       child: Text(
                         "Search",
                       ),
-                      onPressed: isbnFormSubmit,
+                      onPressed: () {
+                        isbnFormSubmit(context);
+                      },
                       padding: EdgeInsets.symmetric(
                         horizontal: 100,
                       ),
@@ -71,13 +73,32 @@ class _IsbnFormState extends State<IsbnForm> {
   String isbnValidate(String value) =>
       value.length == 10 || value.length == 13 ? null : "Enter a valid ISBN";
 
-  void isbnFormSubmit() {
+  void isbnFormSubmit(BuildContext context) {
     if (_formKey.currentState.validate()) {
       print("Isbn: ${_isbnController.text}");
       final bookBloc = BlocProvider.of<BookBloc>(context);
       bookBloc.dispatch(GetBook(_isbnController.text));
     } else {
       print("Invalid Isbn");
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Error"),
+              content: Text("Please enter a valid ISBN10/13"),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("Close"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
     }
   }
 

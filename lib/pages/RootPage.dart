@@ -26,20 +26,23 @@ class _RootPageState extends State<RootPage> {
       child: Container(
         child: BlocBuilder(
           bloc: bookBloc,
-          builder: (BuildContext context, BookState state) {
-            if (state is BookInitial) {
-              return buildInitial();
-            } else if (state is BookLoadingDetails) {
-              return buildLoading();
-            } else if (state is BookLoadedDetails) {
-              return buildLoaded(state.foundBook);
-            } else if (state is BookInvalid) {
-              return buildInvalid();
-            }
-          },
+          builder: buildPageFromState,
         ),
       ),
     );
+  }
+
+  Widget buildPageFromState(BuildContext context, BookState state) {
+    if (state is BookInitial) {
+      return buildInitial();
+    } else if (state is BookLoadingDetails) {
+      return buildLoading();
+    } else if (state is BookLoadedDetails) {
+      return buildLoaded(state.foundBook);
+    } else if (state is BookInvalid) {
+      return buildInvalid();
+    }
+    return buildInitial();
   }
 
   Widget buildInitial() {
@@ -47,7 +50,7 @@ class _RootPageState extends State<RootPage> {
   }
 
   Widget buildInvalid() {
-    return new InvalidPage(); // * implement invalid page
+    return new InvalidPage();
   }
 
   Widget buildLoading() {

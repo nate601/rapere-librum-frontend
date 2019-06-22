@@ -18,4 +18,6 @@ class BookLoadedDetails extends BookState {
   BookLoadedDetails(this.foundBook) : super([foundBook]);
 }
 
-class BookInvalid extends BookState {}
+class BookInvalid extends BookState {
+  BookInvalid() : super([]);
+}

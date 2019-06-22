@@ -24,7 +24,7 @@ class BookBloc extends Bloc<BookEvent, BookState> {
       if (getBookDetails != null) {
         yield BookLoadedDetails(getBookDetails);
       } else {
-        yield BookInitial();
+        yield BookInvalid();
       }
     } else if (event is ClearSelection) {
       yield BookInitial();
@@ -40,12 +40,12 @@ class BookBloc extends Bloc<BookEvent, BookState> {
       if (barcodes.length == 1) {
         var foundBook = await getBookDetailsFromServer(barcodes[0].rawValue);
         if (foundBook == null) {
-          yield BookInitial();
+          yield BookInvalid();
         } else {
           yield BookLoadedDetails(foundBook);
         }
       } else {
-        yield BookInitial();
+        yield BookInvalid();
       }
     }
   }
